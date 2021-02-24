@@ -11,7 +11,7 @@ public class Main {
         LocalDateTime saturday = now.plusHours(7);
         DueDate dueDate = new DueDate();
 
-        System.out.println(dueDate.dueDateCalculator(saturday, 18));
+        System.out.println(dueDate.calculateHours(12));
 
 
     }
