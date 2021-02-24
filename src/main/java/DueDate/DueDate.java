@@ -26,7 +26,8 @@ public class DueDate {
     }
 
     public boolean isBeforeWorkingHours(LocalDateTime date) {
-        return date.getHour() < 9;
+        LocalDateTime before = date.with(LocalTime.of(9, 0, 0, 0));
+        return date.isBefore(before);
     }
 
     public boolean isAfterWorkingHours(LocalDateTime date) {
@@ -35,7 +36,8 @@ public class DueDate {
     }
 
     public boolean isNotBetweenWorkingHours(LocalDateTime date) {
-        return date.getHour() > 17 || date.getHour() <= 9;
+        LocalDateTime nine = date.with(LocalTime.of(9, 0, 0, 0));
+        return isAfterWorkingHours(date) || isBeforeWorkingHours(date) || date.isEqual(nine);
     }
 
     public int calculateDays(Integer hours) {

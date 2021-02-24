@@ -143,4 +143,19 @@ public class DueDateCalculatorTests {
         assertEquals(expected, dueDate.dueDateCalculator(tuesdayAt1035, 80));
     }
 
+    @Test
+    public void testSubmitAtNoonResultIs1MinuteAfterWorkingHour() throws Exception {
+        DueDate dueDate = new DueDate();
+        LocalDateTime mondayAt12 = LocalDate
+                .now()
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+                .atTime(16, 1);
+
+        LocalDateTime expected = mondayAt12
+                .with(TemporalAdjusters.next(DayOfWeek.TUESDAY))
+                .with(LocalTime.of(9, 1));
+
+        assertEquals(expected, dueDate.dueDateCalculator(mondayAt12, 1));
+    }
+
 }

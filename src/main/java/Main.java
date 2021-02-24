@@ -8,14 +8,12 @@ import java.time.temporal.TemporalAdjusters;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
         DueDate dueDate = new DueDate();
-        LocalDateTime fridayAtFourPM = monday.with(LocalTime.of(9, 0, 0, 0));
-
-        System.out.println(fridayAtFourPM);
-        System.out.println(dueDate.dueDateCalculator(fridayAtFourPM, 2));
-
+        LocalDateTime mondayNoon = LocalDateTime
+                .now()
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+                .with(LocalTime.of(16, 0));
+        System.out.println(dueDate.dueDateCalculator(mondayNoon, 3));
 
     }
 }

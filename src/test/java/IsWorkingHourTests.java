@@ -27,12 +27,12 @@ public class IsWorkingHourTests {
     public void testIsNightBetweenWorkingDay() {
         DueDate dueDate = new DueDate();
 
-        LocalDateTime mondayNoon = LocalDateTime
+        LocalDateTime mondayAt20PM = LocalDateTime
                 .now()
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
                 .with(LocalTime.of(20, 0));
 
 
-        assertTrue(dueDate.isNotBetweenWorkingHours(mondayNoon));
+        assertTrue(dueDate.isNotBetweenWorkingHours(mondayAt20PM));
     }
 }
