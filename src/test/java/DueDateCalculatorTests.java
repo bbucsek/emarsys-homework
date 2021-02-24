@@ -30,6 +30,24 @@ public class DueDateCalculatorTests {
     }
 
     @Test
+    public void testSubmitTimeIsAfterOfWorkingHoursByOneMinuteThrowsException() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime todayAt6 = LocalDate.now().atTime(17, 1);
+
+        Throwable exception = assertThrows(Exception.class, () -> dueDate.dueDateCalculator(todayAt6, 15));
+        assertEquals("Please submit in working hours!", exception.getMessage());
+    }
+
+    @Test
+    public void testSubmitTimeIsAfterOfWorkingHoursByOneNanoSecondThrowsException() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime todayAt6 = LocalDate.now().atTime(17, 0, 0, 1);
+
+        Throwable exception = assertThrows(Exception.class, () -> dueDate.dueDateCalculator(todayAt6, 15));
+        assertEquals("Please submit in working hours!", exception.getMessage());
+    }
+
+    @Test
     public void testSubmitTimeIsSaturdayThrowsException() {
         DueDate dueDate = new DueDate();
         LocalDateTime now = LocalDateTime.now();

@@ -2,6 +2,7 @@ package DueDate;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class DueDate {
 
@@ -29,7 +30,8 @@ public class DueDate {
     }
 
     public boolean isAfterWorkingHours(LocalDateTime date) {
-        return date.getHour() > 17 || date.getHour() == 17 && date.getMinute() > 0;
+        LocalDateTime after = date.with(LocalTime.of(17, 0, 0, 0));
+        return date.isAfter(after);
     }
 
     public boolean isNotBetweenWorkingHours(LocalDateTime date) {
