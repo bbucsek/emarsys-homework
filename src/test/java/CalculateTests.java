@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 
 import static org.junit.Assert.*;
@@ -51,5 +52,66 @@ public class CalculateTests {
 
         assertEquals(7, dueDate.calculateHours(646456455));
     }
+
+    @Test
+    public void calculateResolveDayTestWithoutWeekend() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDateTime expected = monday.plusDays(4);
+
+        assertEquals(expected, dueDate.calculateResolveDay(monday, 4));
+    }
+
+    @Test
+    public void calculateResolveDayTestWithWeekend() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDateTime expected = monday.plusDays(8);
+
+        assertEquals(expected, dueDate.calculateResolveDay(monday, 6));
+    }
+
+    @Test
+    public void calculateResolveDayTestWithWeekendFromFriday() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
+        LocalDateTime expected = monday.plusDays(3);
+
+        assertEquals(expected, dueDate.calculateResolveDay(monday, 1));
+    }
+
+    @Test
+    public void calculateResolveHoursTestWithinWorkingHours() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime monday = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDateTime mondayAtNoon = monday.with(LocalTime.of(12, 0));
+        LocalDateTime expected = mondayAtNoon.plusHours(3);
+
+        assertEquals(expected, dueDate.calculateResolveHours(mondayAtNoon, 3));
+    }
+
+    @Test
+    public void calculateResolveHoursTestAfterWorkingHours() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime monday = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDateTime mondayAtFourPM = monday.with(LocalTime.of(16, 10));
+        LocalDateTime expected = mondayAtFourPM.plusHours(19);
+
+        assertEquals(expected, dueDate.calculateResolveHours(mondayAtFourPM, 3));
+    }
+
+    @Test
+    public void calculateResolveHoursTestAfterWeekend() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime friday = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
+        LocalDateTime fridayAtFourPM = friday.with(LocalTime.of(16, 10));
+        LocalDateTime expected = fridayAtFourPM.plusHours(67);
+
+        assertEquals(expected, dueDate.calculateResolveHours(fridayAtFourPM, 3));
+    }
+
 }
 

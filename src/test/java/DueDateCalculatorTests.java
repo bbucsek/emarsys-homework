@@ -12,9 +12,18 @@ import static org.junit.Assert.*;
 public class DueDateCalculatorTests {
 
     @Test
-    public void testSubmitTimeIsOutOfWorkingHoursThrowsException() {
+    public void testSubmitTimeIsBeforeOfWorkingHoursThrowsException() {
         DueDate dueDate = new DueDate();
         LocalDateTime todayAt6 = LocalDate.now().atTime(6, 0);
+
+        Throwable exception = assertThrows(Exception.class, () -> dueDate.dueDateCalculator(todayAt6, 15));
+        assertEquals("Please submit in working hours!", exception.getMessage());
+    }
+
+    @Test
+    public void testSubmitTimeIsAfterOfWorkingHoursThrowsException() {
+        DueDate dueDate = new DueDate();
+        LocalDateTime todayAt6 = LocalDate.now().atTime(18, 0);
 
         Throwable exception = assertThrows(Exception.class, () -> dueDate.dueDateCalculator(todayAt6, 15));
         assertEquals("Please submit in working hours!", exception.getMessage());

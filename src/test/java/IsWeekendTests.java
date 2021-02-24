@@ -15,7 +15,7 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime monday = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
 
-        assertFalse(dueDate.isNextDayWeekend(monday));
+        assertFalse(dueDate.isWeekend(monday));
     }
 
     @Test
@@ -24,7 +24,7 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime tuesday = now.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
 
-        assertFalse(dueDate.isNextDayWeekend(tuesday));
+        assertFalse(dueDate.isWeekend(tuesday));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime wednesday = now.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
 
-        assertFalse(dueDate.isNextDayWeekend(wednesday));
+        assertFalse(dueDate.isWeekend(wednesday));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime thursday = now.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
 
-        assertFalse(dueDate.isNextDayWeekend(thursday));
+        assertFalse(dueDate.isWeekend(thursday));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime friday = now.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
 
-        assertFalse(dueDate.isNextDayWeekend(friday));
+        assertFalse(dueDate.isWeekend(friday));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime saturday = now.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 
-        assertTrue(dueDate.isNextDayWeekend(saturday));
+        assertTrue(dueDate.isWeekend(saturday));
     }
 
     @Test
@@ -69,6 +69,6 @@ public class IsWeekendTests {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime sunday = now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
 
-        assertTrue(dueDate.isNextDayWeekend(sunday));
+        assertTrue(dueDate.isWeekend(sunday));
     }
 }
