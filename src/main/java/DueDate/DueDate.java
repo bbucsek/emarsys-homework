@@ -7,7 +7,7 @@ public class DueDate {
 
     public LocalDateTime dueDateCalculator(LocalDateTime submitDate, Integer turnaroundTime) throws Exception {
         if (isWeekend(submitDate)) {
-            throw new Exception("cannot submit on a weekend!");
+            throw new Exception("Cannot submit on a weekend!");
         }
         if (isBeforeWorkingHours(submitDate) || isAfterWorkingHours(submitDate)) {
             throw new Exception("Please submit in working hours!");
@@ -29,10 +29,10 @@ public class DueDate {
     }
 
     public boolean isAfterWorkingHours(LocalDateTime date) {
-        return date.getHour() > 17;
+        return date.getHour() > 17 || date.getHour() == 17 && date.getMinute() > 0;
     }
 
-    public boolean isBetweenWorkingHours(LocalDateTime date) {
+    public boolean isNotBetweenWorkingHours(LocalDateTime date) {
         return date.getHour() > 17 || date.getHour() <= 9;
     }
 
@@ -60,7 +60,7 @@ public class DueDate {
             return date;
         }
         LocalDateTime tempDate = date.plusHours(1);
-        if (isBetweenWorkingHours(tempDate) || isWeekend(tempDate)) {
+        if (isNotBetweenWorkingHours(tempDate) || isWeekend(tempDate)) {
             return calculateResolveHours(tempDate, hours);
         }
         return calculateResolveHours(tempDate, hours - 1);

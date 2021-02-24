@@ -37,7 +37,7 @@ public class DueDateCalculatorTests {
         LocalDateTime saturday = now.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 
         Throwable exception = assertThrows(Exception.class, () -> dueDate.dueDateCalculator(saturday, 15));
-        assertEquals("cannot submit on a weekend!", exception.getMessage());
+        assertEquals("Cannot submit on a weekend!", exception.getMessage());
     }
 
     @Test
@@ -48,6 +48,6 @@ public class DueDateCalculatorTests {
         LocalDateTime sunday = now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
 
         Throwable exception = assertThrows(Exception.class, () -> dueDate.dueDateCalculator(sunday, 15));
-        assertEquals("cannot submit on a weekend!", exception.getMessage());
+        assertEquals("Cannot submit on a weekend!", exception.getMessage());
     }
 }
