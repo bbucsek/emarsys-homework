@@ -56,8 +56,7 @@ public class CalculateTests {
     @Test
     public void calculateResolveDayTestWithoutWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDateTime monday = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDateTime expected = monday.plusDays(4);
 
         assertEquals(expected, dueDate.calculateResolveDay(monday, 4));
@@ -66,8 +65,7 @@ public class CalculateTests {
     @Test
     public void calculateResolveDayTestWithWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDateTime monday = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDateTime expected = monday.plusDays(8);
 
         assertEquals(expected, dueDate.calculateResolveDay(monday, 6));
@@ -76,8 +74,7 @@ public class CalculateTests {
     @Test
     public void calculateResolveDayTestWithWeekendFromFriday() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime monday = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
+        LocalDateTime monday = LocalDateTime.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
         LocalDateTime expected = monday.plusDays(3);
 
         assertEquals(expected, dueDate.calculateResolveDay(monday, 1));

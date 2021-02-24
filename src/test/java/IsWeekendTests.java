@@ -13,7 +13,7 @@ public class IsWeekendTests {
     public void testMondayIsNotWeekend() {
         DueDate dueDate = new DueDate();
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime monday = now.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+        LocalDateTime monday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY));
 
         assertFalse(dueDate.isWeekend(monday));
     }
@@ -30,8 +30,7 @@ public class IsWeekendTests {
     @Test
     public void testWednesdayIsNotWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime wednesday = now.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+        LocalDateTime wednesday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
 
         assertFalse(dueDate.isWeekend(wednesday));
     }
@@ -39,8 +38,7 @@ public class IsWeekendTests {
     @Test
     public void testThursdayIsNotWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime thursday = now.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+        LocalDateTime thursday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
 
         assertFalse(dueDate.isWeekend(thursday));
     }
@@ -48,8 +46,7 @@ public class IsWeekendTests {
     @Test
     public void testFridayIsNotWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime friday = now.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        LocalDateTime friday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
 
         assertFalse(dueDate.isWeekend(friday));
     }
@@ -57,8 +54,7 @@ public class IsWeekendTests {
     @Test
     public void testSaturdayIsWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime saturday = now.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+        LocalDateTime saturday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
 
         assertTrue(dueDate.isWeekend(saturday));
     }
@@ -66,8 +62,7 @@ public class IsWeekendTests {
     @Test
     public void testSundayIsWeekend() {
         DueDate dueDate = new DueDate();
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime sunday = now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+        LocalDateTime sunday = LocalDateTime.now().with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
 
         assertTrue(dueDate.isWeekend(sunday));
     }
