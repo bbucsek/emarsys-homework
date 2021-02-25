@@ -11,9 +11,9 @@ public class Main {
         DueDate dueDate = new DueDate();
         LocalDateTime mondayNoon = LocalDateTime
                 .now()
-                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                .with(LocalTime.of(16, 0));
-        System.out.println(dueDate.dueDateCalculator(mondayNoon, 3));
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY))
+                .with(LocalTime.of(16, 59));
+        System.out.println(dueDate.dueDateCalculator(mondayNoon, 1));
 
     }
 }

@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class IsWorkingHourTests {
 
     @Test
-    public void testIsNoonBetweenWorkingDay() {
+    public void testIsNoonIsNotBetweenWorkingHours() {
         DueDate dueDate = new DueDate();
 
         LocalDateTime mondayNoon = LocalDateTime
@@ -24,7 +24,7 @@ public class IsWorkingHourTests {
     }
 
     @Test
-    public void testIsNightBetweenWorkingDay() {
+    public void testIsNightIsNotBetweenWorkingHours() {
         DueDate dueDate = new DueDate();
 
         LocalDateTime mondayAt20PM = LocalDateTime
@@ -34,5 +34,18 @@ public class IsWorkingHourTests {
 
 
         assertTrue(dueDate.isNotBetweenWorkingHours(mondayAt20PM));
+    }
+
+    @Test
+    public void testIs17PMIsNotBetweenWorkingHours() {
+        DueDate dueDate = new DueDate();
+
+        LocalDateTime fridayAt17 = LocalDateTime
+                .now()
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+                .with(LocalTime.of(17, 0));
+
+
+        assertFalse(dueDate.isNotBetweenWorkingHours(fridayAt17));
     }
 }

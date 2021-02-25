@@ -158,4 +158,34 @@ public class DueDateCalculatorTests {
         assertEquals(expected, dueDate.dueDateCalculator(mondayAt12, 1));
     }
 
+    @Test
+    public void testFridayOneMinuteBeforeWorkingHoursEnd() throws Exception {
+        DueDate dueDate = new DueDate();
+        LocalDateTime fridayAt16 = LocalDate
+                .now()
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY))
+                .atTime(16, 59);
+
+        LocalDateTime expected = fridayAt16
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .with(LocalTime.of(9, 59));
+
+        assertEquals(expected, dueDate.dueDateCalculator(fridayAt16, 1));
+    }
+
+    @Test
+    public void TestFriday17PM() throws Exception {
+        DueDate dueDate = new DueDate();
+        LocalDateTime fridayAt17 = LocalDate
+                .now()
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY))
+                .atTime(17, 0);
+
+        LocalDateTime expected = fridayAt17
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .with(LocalTime.of(10, 0));
+
+        assertEquals(expected, dueDate.dueDateCalculator(fridayAt17, 1));
+    }
+
 }
